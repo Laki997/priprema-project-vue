@@ -22,6 +22,13 @@ class PostService extends baseService {
 
     return data;
   }
+
+  async edit(post) {
+    const { data } = await this.client.put(`/posts/${post.id}`, post);
+    console.log(post);
+
+    return data;
+  }
 }
 
 const postService = new PostService();

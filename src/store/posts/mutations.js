@@ -12,6 +12,10 @@ export const mutations = {
     console.log(payload);
   },
 
+  // editOnePost(state, payload) {
+  //   state.post = state.posts.find((post) => post.id === payload.id);
+  // },
+
   deleteOnePost(state, payload) {
     state.posts = state.posts.filter((post) => {
       post.id !== payload.id;

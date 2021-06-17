@@ -15,13 +15,21 @@ export const actions = {
 
   async getOne(store, id) {
     const post = await postService.getOne(id);
-    console.log(post);
+    // console.log(post);
     store.commit("setOnePost", post);
   },
 
-  async deleteOne(store, id) {
-    const post = await postService.delete(id);
+  async deleteOne(store, post) {
+    await postService.delete(post.id);
 
     store.commit("deleteOnePost", post);
+  },
+
+  async editOne(store, post) {
+    const data = await postService.edit(post);
+    console.log(data);
+    console.log(post);
+
+    store.commit("setOnePost", post);
   },
 };

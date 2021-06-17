@@ -1,7 +1,15 @@
 <template>
   <div>
-    <div v-for="post in allPosts" :key="post.id">
-      <table class="table">
+    <post-row
+      @post-delete="handlePostDelete"
+      v-for="post in allPosts"
+      :post="post"
+      :key="post.id"
+    >
+    </post-row>
+  </div>
+  <!-- <div v-for="post in allPosts" :key="post.id"> -->
+  <!-- <table class="table">
         <tbody>
           <tr>
             <th>{{ post.id }}</th>
@@ -26,21 +34,27 @@
             </td>
           </tr>
         </tbody>
-      </table>
-    </div>
-  </div>
+      </table> -->
+  <!-- </div> -->
 </template>
 
 <script>
+import store from "../store";
 import { mapActions, mapGetters } from "vuex";
+import PostRow from "./PostRow.vue";
 // import store from "../store";
 export default {
+  components: { PostRow },
   computed: {
     ...mapGetters({ allPosts: "posts/allPosts" }),
   },
 
   methods: {
     ...mapActions({ getAllPosts: "posts/getAllPosts" }),
+
+    handlePostDelete(post) {
+      store.dispatch("posts/deleteOne", post);
+    },
   },
 
   async created() {

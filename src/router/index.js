@@ -5,6 +5,7 @@ import AppLogin from "../components/AppLogin";
 import AppPosts from "../components/AppPosts";
 import AddPost from "../components/AddPost";
 import SinglePost from "../components/SinglePost";
+import EditPost from "../components/EditPost";
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,11 @@ const routes = [
   {
     path: "/posts/:id",
     component: SinglePost,
+    props: true,
+  },
+  {
+    path: "/edit/:id",
+    component: EditPost,
     props: true,
   },
   {
