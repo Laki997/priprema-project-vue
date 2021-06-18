@@ -6,6 +6,7 @@ import AppPosts from "../components/AppPosts";
 import AddPost from "../components/AddPost";
 import SinglePost from "../components/SinglePost";
 import EditPost from "../components/EditPost";
+import { globalAuthGuard } from "../guards/authGuard";
 
 Vue.use(VueRouter);
 
@@ -13,32 +14,38 @@ const routes = [
   {
     path: "/register",
     component: AppRegister,
+    meta: { guestRequired: true },
   },
   {
     path: "/login",
     component: AppLogin,
+    meta: { guestRequired: true },
   },
   {
     path: "/",
-    redirect: "/login",
+    redirect: "/posts",
   },
   {
     path: "/add",
     component: AddPost,
+    meta: { authRequired: true },
   },
   {
     path: "/posts",
     component: AppPosts,
+    meta: { authRequired: true },
   },
   {
     path: "/posts/:id",
     component: SinglePost,
     props: true,
+    meta: { authRequired: true },
   },
   {
     path: "/edit/:id",
     component: EditPost,
     props: true,
+    meta: { authRequired: true },
   },
   {
     path: "/about",
@@ -56,5 +63,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+router.beforeEach(globalAuthGuard);
 
 export default router;

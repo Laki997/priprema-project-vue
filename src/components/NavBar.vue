@@ -28,13 +28,13 @@
           </div>
           <div>
             <input
+              @input="search"
               class="navbar-nav"
-              v-model="search"
               type="text"
               placeholder="Enter term"
             />
           </div>
-          <div class="user">
+          <div class="user" v-if="user && isAuthenticated">
             User:
             <b
               ><strong>{{ user.name }}</strong></b
@@ -51,32 +51,35 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
-    return {
-      search: "",
-      user: {},
-    };
+    return {};
   },
   computed: {
     ...mapGetters({ isAuthenticated: "auth/isAuthenticated" }),
+    user() {
+      return JSON.parse(localStorage.getItem("user"));
+    },
   },
 
   methods: {
     ...mapActions({ logout: "auth/logout" }),
+    ...mapActions("posts", ["getAllPosts"]),
     ...mapMutations({ setSearchTerm: "posts/setSearchTerm" }),
 
     async logoutUser() {
       await this.logout();
       this.$router.push("/login");
     },
-  },
-  watch: {
-    search(value) {
-      this.setSearchTerm(value);
-    },
-  },
 
-  async created() {
-    this.user = JSON.parse(localStorage.getItem("user"));
+    search(evt) {
+      this.setSearchTerm(evt.target.value);
+
+      this.getAllPosts();
+    },
+
+    async beforeCreated() {
+      this.user = JSON.parse(localStorage.getItem("user"));
+      console.log(this.user);
+    },
   },
 };
 </script>

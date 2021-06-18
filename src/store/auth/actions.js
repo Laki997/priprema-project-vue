@@ -14,6 +14,7 @@ export const actions = {
   async register(store, userData) {
     const { user, token } = await authService.register(userData);
     localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("user", JSON.stringify(user));
 
     store.commit("setActiveUser", user);
     store.commit("setToken", token);

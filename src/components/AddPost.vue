@@ -49,7 +49,7 @@ export default {
 
     async onSubmit() {
       await this.createPost(this.post);
-      this.$router.push("/posts");
+      this.$router.push("/");
     },
   },
 };

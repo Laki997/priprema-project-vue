@@ -8,57 +8,36 @@
     >
     </post-row>
   </div>
-  <!-- <div v-for="post in allPosts" :key="post.id"> -->
-  <!-- <table class="table">
-        <tbody>
-          <tr>
-            <th>{{ post.id }}</th>
-            <th>Title</th>
-            <td>{{ post.title }}</td>
-            <th>Body</th>
-            <td>{{ post.body }}</td>
-            <th>Actions</th>
-            <td>
-              <router-link
-                :to="`/posts/${post.id}`"
-                tag="button"
-                class="btn btn-primary"
-                >Info</router-link
-              >
-            </td>
-            <td><button class="btn btn-warning">Edit</button></td>
-            <td>
-              <button class="btn btn-danger">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
-  <!-- </div> -->
 </template>
 
 <script>
 import store from "../store";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import PostRow from "./PostRow.vue";
-// import store from "../store";
+
 export default {
   components: { PostRow },
   computed: {
-    ...mapGetters({ allPosts: "posts/filteredPosts" }),
+    ...mapGetters({ allPosts: "posts/allPosts" }),
   },
 
   methods: {
     ...mapActions({ getAllPosts: "posts/getAllPosts" }),
 
     handlePostDelete(post) {
-      store.dispatch("posts/deleteOne", post);
+      if (this.$store.getters["auth/user"].id !== post.user_id) {
+        alert("Samo autor posta sme da ga obrise");
+      } else {
+        store.dispatch("posts/deleteOne", post);
+
+        this.getAllPosts();
+      }
     },
   },
 
   async created() {
     await this.getAllPosts();
+    await this.$store.dispatch("auth/getActiveUser");
   },
 };
 </script>

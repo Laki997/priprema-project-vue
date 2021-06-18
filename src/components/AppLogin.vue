@@ -48,7 +48,7 @@ export default {
     async onSubmit() {
       await this.login(this.user)
         .then(() => {
-          this.$router.push("/about");
+          this.$router.push("/posts");
         })
         .catch((error) => {
           alert(error.response.data.message);
