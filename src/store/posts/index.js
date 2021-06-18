@@ -7,6 +7,7 @@ const store = {
   state: () => ({
     posts: [],
     post: {},
+    searchTerm: "",
   }),
   actions,
   getters,

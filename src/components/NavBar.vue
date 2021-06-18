@@ -26,6 +26,20 @@
           <div class="navbar-nav">
             <a class="button" @click="logoutUser">Logout</a>
           </div>
+          <div>
+            <input
+              class="navbar-nav"
+              v-model="search"
+              type="text"
+              placeholder="Enter term"
+            />
+          </div>
+          <div class="user">
+            User:
+            <b
+              ><strong>{{ user.name }}</strong></b
+            >
+          </div>
         </template>
       </div>
     </nav>
@@ -33,32 +47,43 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
+  data() {
+    return {
+      search: "",
+      user: {},
+    };
+  },
   computed: {
-    ...mapGetters(
-      { isAuthenticated: "auth/isAuthenticated" },
-      { user: "auth/user" }
-    ),
+    ...mapGetters({ isAuthenticated: "auth/isAuthenticated" }),
   },
 
   methods: {
-    ...mapActions(
-      { logout: "auth/logout" },
-      { getActiveUser: "auth/getActiveUser" }
-    ),
+    ...mapActions({ logout: "auth/logout" }),
+    ...mapMutations({ setSearchTerm: "posts/setSearchTerm" }),
 
     async logoutUser() {
       await this.logout();
       this.$router.push("/login");
     },
   },
+  watch: {
+    search(value) {
+      this.setSearchTerm(value);
+    },
+  },
 
   async created() {
-    await this.$store.dispatch("auth/getActiveUser");
+    this.user = JSON.parse(localStorage.getItem("user"));
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.user {
+  background: wheat;
+  color: blue;
+}
+</style>

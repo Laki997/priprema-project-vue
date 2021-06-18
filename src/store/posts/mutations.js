@@ -21,4 +21,8 @@ export const mutations = {
       post.id !== payload.id;
     });
   },
+
+  setSearchTerm(state, payload) {
+    state.searchTerm = payload;
+  },
 };

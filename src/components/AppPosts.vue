@@ -46,7 +46,7 @@ import PostRow from "./PostRow.vue";
 export default {
   components: { PostRow },
   computed: {
-    ...mapGetters({ allPosts: "posts/allPosts" }),
+    ...mapGetters({ allPosts: "posts/filteredPosts" }),
   },
 
   methods: {
