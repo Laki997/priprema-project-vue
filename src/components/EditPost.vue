@@ -37,6 +37,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+
 // import store from "../store";
 
 export default {
@@ -55,18 +56,19 @@ export default {
     ...mapActions({ getOne: "posts/getOne" }, { editOne: "posts/editOne" }),
 
     async onSubmit() {
-      await this.$store.dispatch("posts/editOne", this.newPost);
-      //   await store.dispatch("posts/editOne", this.id, this.newPost);
-      this.$router.push("/posts");
+      if (this.$store.getters["auth/user"].id !== this.newPost.user_id) {
+        alert("Nazalost, samo autor posta sme da ga modifkuje!");
+      } else {
+        await this.$store.dispatch("posts/editOne", this.newPost);
+        this.$router.push("/posts");
+      }
     },
   },
 
   async created() {
-    if (this.id) {
-      await this.getOne(this.id);
-      this.newPost = this.singlePost;
-      console.log(this.newPost);
-    }
+    await this.getOne(this.id);
+    this.newPost = this.singlePost;
+    await this.$store.dispatch("auth/getActiveUser");
   },
 };
 </script>

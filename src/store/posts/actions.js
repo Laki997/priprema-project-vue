@@ -27,9 +27,9 @@ export const actions = {
 
   async editOne(store, post) {
     const data = await postService.edit(post);
-    console.log(data);
-    console.log(post);
 
     store.commit("setOnePost", post);
+
+    return data;
   },
 };
