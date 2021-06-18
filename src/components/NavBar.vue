@@ -34,7 +34,7 @@
               placeholder="Enter term"
             />
           </div>
-          <div class="user" v-if="user && isAuthenticated">
+          <div class="user" v-if="user">
             User:
             <b
               ><strong>{{ user.name }}</strong></b
@@ -55,8 +55,12 @@ export default {
   },
   computed: {
     ...mapGetters({ isAuthenticated: "auth/isAuthenticated" }),
+    ...mapGetters("auth", ["user"]),
+  },
+
+  watch: {
     user() {
-      return JSON.parse(localStorage.getItem("user"));
+      this.user = JSON.parse(localStorage.getItem("user"));
     },
   },
 
@@ -75,12 +79,12 @@ export default {
 
       this.getAllPosts();
     },
-
-    async beforeCreated() {
-      this.user = JSON.parse(localStorage.getItem("user"));
-      console.log(this.user);
-    },
   },
+  // created() {
+  //   // JSON.parse(localStorage.getItem("user"));
+  //   // console.log(this.user);
+  //   this.user = JSON.parse(localStorage.getItem("user"));
+  // },
 };
 </script>
 
