@@ -7,6 +7,30 @@ export const actions = {
     store.commit("getAllPosts", data);
   },
 
+  async getTitleAsc(store) {
+    const data = await postService.getTitleAsc();
+
+    store.commit("getAllPosts", data);
+  },
+
+  async getTitleDesc(store) {
+    const data = await postService.getTitleDesc();
+
+    store.commit("getAllPosts", data);
+  },
+
+  async getDateAsc(store) {
+    const data = await postService.getDateAsc();
+
+    store.commit("getAllPosts", data);
+  },
+
+  async getDateDesc(store) {
+    const data = await postService.getDateDesc();
+
+    store.commit("getAllPosts", data);
+  },
+
   async createPost(store, data) {
     const post = await postService.create(data);
 

@@ -2,6 +2,10 @@
   <div>
     <post-row
       @post-delete="handlePostDelete"
+      @title-asc="handleTitleAsc"
+      @title-desc="handleTitleDesc"
+      @date-asc="handleDateAsc"
+      @date-desc="handleDateDesc"
       v-for="post in allPosts"
       :post="post"
       :key="post.id"
@@ -23,6 +27,10 @@ export default {
 
   methods: {
     ...mapActions({ getAllPosts: "posts/getAllPosts" }),
+    ...mapActions({ getTitleAsc: "posts/getTitleAsc" }),
+    ...mapActions({ getTitleDesc: "posts/getTitleDesc" }),
+    ...mapActions({ getDateAsc: "posts/getDateAsc" }),
+    ...mapActions({ getDateDesc: "posts/getDateDesc" }),
 
     handlePostDelete(post) {
       if (this.$store.getters["auth/user"].id !== post.user_id) {
@@ -32,6 +40,19 @@ export default {
 
         this.getAllPosts();
       }
+    },
+
+    handleTitleAsc() {
+      this.getTitleAsc();
+    },
+    handleTitleDesc() {
+      this.getTitleDesc();
+    },
+    handleDateAsc() {
+      this.getDateAsc();
+    },
+    handleDateDesc() {
+      this.getDateDesc();
     },
   },
 

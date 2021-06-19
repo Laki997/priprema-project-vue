@@ -7,6 +7,27 @@ class PostService extends baseService {
     return data;
   }
 
+  async getTitleAsc() {
+    const { data } = await this.client.get("/posts/titleAsc");
+
+    return data;
+  }
+  async getTitleDesc() {
+    const { data } = await this.client.get("/posts/titleDesc");
+
+    return data;
+  }
+  async getDateAsc() {
+    const { data } = await this.client.get("/posts/dateAsc");
+
+    return data;
+  }
+  async getDateDesc() {
+    const { data } = await this.client.get("/posts/dateDesc");
+
+    return data;
+  }
+
   async create(data) {
     await this.client.post("/posts", data);
   }

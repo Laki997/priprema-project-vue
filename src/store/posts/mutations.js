@@ -12,8 +12,8 @@ export const mutations = {
     console.log(payload);
   },
 
-  // editOnePost(state, payload) {
-  //   state.post = state.posts.find((post) => post.id === payload.id);
+  // getTitleAsc(state, payload) {
+  //   state.posts = payload;
   // },
 
   deleteOnePost(state, payload) {

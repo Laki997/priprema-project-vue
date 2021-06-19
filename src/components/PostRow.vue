@@ -8,6 +8,8 @@
           <td>{{ post.title }}</td>
           <th>Body</th>
           <td>{{ post.body }}</td>
+          <th>Date</th>
+          <td>{{ post.created_at }}</td>
           <th>Actions</th>
           <td>
             <router-link
@@ -30,6 +32,26 @@
               Delete
             </button>
           </td>
+          <td>
+            <button class="btn btn-success" @click="filterTitleAsc">
+              Title asc
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-success" @click="filterTitleDesc">
+              Title desc
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-success" @click="filterDateAsc">
+              Date asc
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-success" @click="filterDateDesc">
+              Date desc
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -43,6 +65,19 @@ export default {
     handleDelete() {
       this.$emit("post-delete", this.post);
       console.log(this.post);
+    },
+
+    filterTitleAsc() {
+      this.$emit("title-asc");
+    },
+    filterTitleDesc() {
+      this.$emit("title-desc");
+    },
+    filterDateAsc() {
+      this.$emit("date-asc");
+    },
+    filterDateDesc() {
+      this.$emit("date-desc");
     },
   },
 };
