@@ -1,8 +1,10 @@
 import baseService from "./baseService";
 
 class PostService extends baseService {
-  async getAll(title) {
-    const { data } = await this.client.get("/posts", { params: { title } });
+  async getAll(title, page) {
+    const { data } = await this.client.get("/posts", {
+      params: { title, page },
+    });
 
     return data;
   }

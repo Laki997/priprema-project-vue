@@ -8,6 +8,8 @@ const store = {
     posts: [],
     post: {},
     searchTerm: "",
+    pagination: {},
+    page: 1,
   }),
   actions,
   getters,

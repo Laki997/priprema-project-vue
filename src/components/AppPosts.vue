@@ -11,6 +11,7 @@
       :key="post.id"
     >
     </post-row>
+    <pagination :pagination="pagination" @pagination="getAllPosts"></pagination>
   </div>
 </template>
 
@@ -18,11 +19,13 @@
 import store from "../store";
 import { mapGetters, mapActions } from "vuex";
 import PostRow from "./PostRow.vue";
+import Pagination from "./Pagination.vue";
 
 export default {
-  components: { PostRow },
+  components: { PostRow, Pagination },
   computed: {
     ...mapGetters({ allPosts: "posts/allPosts" }),
+    ...mapGetters({ pagination: "posts/pagination" }),
   },
 
   methods: {
@@ -58,6 +61,7 @@ export default {
 
   async created() {
     await this.getAllPosts();
+
     await this.$store.dispatch("auth/getActiveUser");
   },
 };

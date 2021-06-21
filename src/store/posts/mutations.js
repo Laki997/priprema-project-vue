@@ -12,6 +12,15 @@ export const mutations = {
     console.log(payload);
   },
 
+  pagination(state, payload) {
+    state.pagination = payload;
+  },
+
+  setPage(state, payload) {
+    state.page = payload;
+    console.log(payload);
+  },
+
   // getTitleAsc(state, payload) {
   //   state.posts = payload;
   // },

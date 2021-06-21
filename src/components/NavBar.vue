@@ -60,7 +60,9 @@ export default {
 
   watch: {
     user() {
-      this.user = JSON.parse(localStorage.getItem("user"));
+      // this.user = JSON.parse(localStorage.getItem("user"));
+      //   return JSON.parse(localStorage.getItem("user"));
+      //   this.$store.dispatch("auth/getActiveUser");
     },
   },
 
@@ -80,11 +82,12 @@ export default {
       this.getAllPosts();
     },
   },
-  // created() {
-  //   // JSON.parse(localStorage.getItem("user"));
-  //   // console.log(this.user);
-  //   this.user = JSON.parse(localStorage.getItem("user"));
-  // },
+  created() {
+    // JSON.parse(localStorage.getItem("user"));
+    // console.log(this.user);
+    // this.user = JSON.parse(localStorage.getItem("user"));
+    // console.log(this.user);
+  },
 };
 </script>
 

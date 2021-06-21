@@ -1,10 +1,12 @@
 import postService from "../../services/postService";
 
 export const actions = {
-  async getAllPosts(store) {
-    const data = await postService.getAll(store.state.searchTerm);
-
-    store.commit("getAllPosts", data);
+  async getAllPosts(store, page) {
+    const data = await postService.getAll(store.state.searchTerm, page);
+    console.log(store.state.page);
+    console.log(data);
+    store.commit("pagination", data);
+    store.commit("getAllPosts", data.data);
   },
 
   async getTitleAsc(store) {
